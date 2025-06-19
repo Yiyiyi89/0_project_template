@@ -3,6 +3,7 @@
 *.xlsx
 *.xls
 *.json
+*.pdf
 *.pkl
 *.h5
 *.parquet
@@ -40,6 +41,14 @@ ENV/
 .vscode/
 *.sublime-workspace
 *.sublime-project
+
+# Ignore all files in data folders (but keep .gitkeep)
+Build/data/*
+Analysis/data/*
+!Build/data/.gitkeep
+!Analysis/data/.gitkeep
+!Build/data/*/.gitkeep
+!Analysis/data/*/.gitkeep
 
 # Keep empty directories
 !*/
