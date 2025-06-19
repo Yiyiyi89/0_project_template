@@ -3,8 +3,8 @@ from pathlib import Path
 # ————————————————————————————— #
 #     Core Paths
 # ————————————————————————————— #
-CODE_PATH = Path.cwd()
-PARENT_PATH = CODE_PATH.parent
+BUILD_CODE = Path.cwd()
+PARENT_PATH = BUILD_CODE.parent.parent
 
 # ————————————————————————————— #
 #     Build Area
@@ -34,7 +34,7 @@ ANALYSIS_OUTPUT = ANALYSIS_DATA / "output"
 # ————————————————————————————— #
 if __name__ == "__main__":
     print("|" + "-" * 78)
-    print("|CODE_PATH:               ", CODE_PATH)
+    print("|BUILD_CODE:               ", BUILD_CODE)
     print("|PARENT_PATH:             ", PARENT_PATH)
     print("|" + "-" * 78)
 
