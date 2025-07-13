@@ -1,44 +1,69 @@
-********************************************************************************
+
+****************************************************
 * Listing packages to check and install if missing
-********************************************************************************
+****************************************************
 // 1. List all the packages you want
-local pkgs spmap shp2dta mif2dta egenmore binscatter
+local pkgs estout spmap shp2dta mif2dta egenmore binscatter ftools reghdfe ivreg2 ranktest ivreghdfe
 
 // 2. Loop over each package, check with ssc describe, install if missing
 foreach pkg of local pkgs {
-    quietly ssc describe `pkg'      // _rc==0 if installed, ≠0 otherwise :contentReference[oaicite:0]{index=0}
-    if _rc {
-        display as text `"📦 Installing `pkg' from SSC..."'
-        quietly ssc install `pkg', replace
+    if "`pkg'" == "egenmore" {
+        // use help to check if the package is installed
+        capture help egenmore
+        if _rc {
+            display "📦 Installing egenmore..."
+            ssc install egenmore, replace
+        }
+        else {
+            display "✔ egenmore is already installed."
+        }
+    }
+    else if "`pkg'" == "ivreghdfe" {
+        // use help to check if the package is installed
+        capture which `pkg'.ado
+        if _rc {
+            display "📦 Installing ivreghdfe..."
+            net install ivreghdfe, from("https://raw.githubusercontent.com/sergiocorreia/ivreghdfe/master/src/") replace
+        }
+        else {
+            display "✔ ivreghdfe is already installed."
+        }
     }
     else {
-        display as result `"✔ `pkg' is already installed."'
+        // use which to check if the package is installed
+        capture which `pkg'.ado
+        if _rc {
+            display "📦 Installing `pkg'..."
+            ssc install `pkg', replace
+        }
+        else {
+            display "✔ `pkg' is already installed."
+        }
     }
 }
-
-********************************************************************************
-* sets.do - Cross-platform, portable path setup
-********************************************************************************
+****************************************************
+* set_paths.do - Cross-platform, portable path setup
+****************************************************
 
 * Save current working directory
-global code "`c(pwd)'"
+global code_path "`c(pwd)'"
 
 
 mata:
     // Get current code path from Stata global macro
-    code = st_global("code")
+    code_path = st_global("code_path")
 
     // Extract upper-level directories
-    analysis = pathgetparent(code)
-    parent = pathgetparent(analysis)
+    analysis_path = pathgetparent(code_path)
+    parent_path = pathgetparent(analysis_path)
 
     // Save them back to Stata as global macros
-    st_global("analysis", analysis)
-    st_global("parent", parent)
+    st_global("analysis_path", analysis_path)
+    st_global("parent_path", parent_path)
 
-    // Detect the path separator used in code
-    pos_slash  = strpos(code, "/")
-    pos_bslash = strpos(code, "\")
+    // Detect the path separator used in code_path
+    pos_slash  = strpos(code_path, "/")
+    pos_bslash = strpos(code_path, "\")
 
     if (pos_slash > 0 & (pos_bslash == 0 | pos_slash < pos_bslash)) {
         sep = "/"
@@ -55,53 +80,34 @@ end
 
 
 
-********************************************************************************
-* 📁 Main Project Folders
-********************************************************************************
-
-* ✨ Build Area
-global BUILD_ROOT               "${PARENT}${SEP}build"
-    global BUILD_CODE           "${BUILD_ROOT}${SEP}code"
-    global BUILD_DATA           "${BUILD_ROOT}${SEP}data"
-        global DATA_RAW                "${BUILD_DATA}${SEP}raw"
-        global DATA_TEMP               "${BUILD_DATA}${SEP}temp"
-        global DATA_PROCESSED          "${BUILD_DATA}${SEP}processed"
-
-* ✨ Analysis Area
-global ANALYSIS_ROOT            "${PARENT}${SEP}analysis"
-    global ANALYSIS_CODE        "${ANALYSIS_ROOT}${SEP}code"
-    global ANALYSIS_DATA        "${ANALYSIS_ROOT}${SEP}data"
-        global ANALYSIS_INPUT          "${ANALYSIS_DATA}${SEP}input"
-        global ANALYSIS_OUTPUT         "${ANALYSIS_DATA}${SEP}output"
+****************************************************
+* 📁 Main project folders
+****************************************************
+global build_path            "$parent_path${sep}build"
+global data_path             "$build_path${sep}data"  
+global raw_data_path         "$data_path${sep}raw"                
+global temp_data_path        "$data_path${sep}temp"            
+global output_data_path      "$data_path${sep}output"                 
+global table_figure_path     "$analysis_path${sep}tables and figures"
 
 
-********************************************************************************
-* 📁 Display Current Configuration
-********************************************************************************
-
-* ✨ Core Settings
+****************************************************
+* 📁 Display current configuration
+****************************************************
 display "--------------------------------------------"
-display "📁 PARENT:                $PARENT"
-display "📁 SEP:                   `$SEP'"
+display "📁 OS Detected:            `os'"
+display "📁 Path Separator:         $sep"
 display "--------------------------------------------"
-
-* ✨ Build Area
-display "📁 BUILD_ROOT:            $BUILD_ROOT"
-display "  📁 BUILD_CODE:          $BUILD_CODE"
-display "  📁 BUILD_DATA:          $BUILD_DATA"
-display "    📁 RAW:               $DATA_RAW"
-display "    📁 TEMP:              $DATA_TEMP"
-display "    📁 PROCESSED:         $DATA_PROCESSED"
+display "📁 parent_path:            $parent_path"
 display "--------------------------------------------"
-
-* ✨ Analysis Area
-display "📁 ANALYSIS_ROOT:         $ANALYSIS_ROOT"
-display "  📁 ANALYSIS_CODE:       $ANALYSIS_CODE"
-display "  📁 ANALYSIS_DATA:       $ANALYSIS_DATA"
-display "    📁 INPUT:             $ANALYSIS_INPUT"
-display	"	 Only for data that can be used for generating tables and figures."
-display "    📁 OUTPUT:            $ANALYSIS_OUTPUT"
-display	"	 Only for tables and figures"
+display "📁 build:          "
+display "	📁 data_path:              $data_path"
+display "   	📁 raw_data_path:       $raw_data_path"
+display "   	📁 temp_data_path:       $temp_data_path"
+display "   	📁 output_data_path:     $output_data_path"
 display "--------------------------------------------"
-
+display "📁 analysis_path:          $analysis_path"
+display "	📁 code_path:              $code_path"
+display "	📁 table_figure_path:      $table_figure_path"
+display "--------------------------------------------"
 
