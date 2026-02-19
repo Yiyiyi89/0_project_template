@@ -1,10 +1,11 @@
 
 ****************************************************
-* Listing packages to check and install if missing
+* 📁  Current Packages Configuration
 ****************************************************
-// 1. List all the packages you want
-local pkgs estout spmap shp2dta mif2dta egenmore binscatter ftools reghdfe ivreg2 ranktest ivreghdfe
+// List all the packages to be installed
+local pkgs estout spmap shp2dta mif2dta egenmore binscatter ftools reghdfe ivreg2 ranktest ivreghdfe csdid eventstudyinteract
 
+qui {
 // 2. Loop over each package, check with ssc describe, install if missing
 foreach pkg of local pkgs {
     if "`pkg'" == "egenmore" {
@@ -46,24 +47,22 @@ foreach pkg of local pkgs {
 ****************************************************
 
 * Save current working directory
-global code_path "`c(pwd)'"
+global CODE "`c(pwd)'"
 
 
 mata:
     // Get current code path from Stata global macro
-    code_path = st_global("code_path")
+    CODE = st_global("CODE")
 
-    // Extract upper-level directories
-    analysis_path = pathgetparent(code_path)
-    parent_path = pathgetparent(analysis_path)
+    // Extract parent directory (one level up from code)
+    PARENT = pathgetparent(CODE)
 
     // Save them back to Stata as global macros
-    st_global("analysis_path", analysis_path)
-    st_global("parent_path", parent_path)
+    st_global("PARENT", PARENT)
 
-    // Detect the path separator used in code_path
-    pos_slash  = strpos(code_path, "/")
-    pos_bslash = strpos(code_path, "\")
+    // Detect the path separator used in CODE
+    pos_slash  = strpos(CODE, "/")
+    pos_bslash = strpos(CODE, "\")
 
     if (pos_slash > 0 & (pos_bslash == 0 | pos_slash < pos_bslash)) {
         sep = "/"
@@ -83,31 +82,35 @@ end
 ****************************************************
 * 📁 Main project folders
 ****************************************************
-global build_path            "$parent_path${sep}build"
-global data_path             "$build_path${sep}data"  
-global raw_data_path         "$data_path${sep}raw"                
-global temp_data_path        "$data_path${sep}temp"            
-global output_data_path      "$data_path${sep}output"                 
-global table_figure_path     "$analysis_path${sep}tables and figures"
 
+global DATA             "$PARENT${sep}data"  
+global DATA_RAW         "$DATA${sep}raw"                
+global DATA_CLEAN       "$DATA${sep}clean"                
+global DATA_TEMP        "$DATA${sep}temp"            
+
+global OUTPUT           "$PARENT${sep}output"
+global OUTPUT_FIGURE    "$OUTPUT${sep}figure"
+global OUTPUT_TABLE     "$OUTPUT${sep}table"
+}
 
 ****************************************************
-* 📁 Display current configuration
+* 📁 Current Paths Configuration
 ****************************************************
-display "--------------------------------------------"
-display "📁 OS Detected:            `os'"
-display "📁 Path Separator:         $sep"
-display "--------------------------------------------"
-display "📁 parent_path:            $parent_path"
-display "--------------------------------------------"
-display "📁 build:          "
-display "	📁 data_path:              $data_path"
-display "   	📁 raw_data_path:       $raw_data_path"
-display "   	📁 temp_data_path:       $temp_data_path"
-display "   	📁 output_data_path:     $output_data_path"
-display "--------------------------------------------"
-display "📁 analysis_path:          $analysis_path"
-display "	📁 code_path:              $code_path"
-display "	📁 table_figure_path:      $table_figure_path"
-display "--------------------------------------------"
 
+qui {
+noisily display "--------------------------------------------"
+noisily display "📁 OS Detected:            `c(os)'"
+noisily display "📁 Path Separator:         $sep"
+noisily display "--------------------------------------------"
+noisily display "📁 PARENT:            $PARENT"
+noisily display "--------------------------------------------"
+noisily display "📁 DATA:              $DATA"
+noisily display "   	📁 DATA_RAW:       $DATA_RAW"
+noisily display "   	📁 DATA_TEMP:      $DATA_TEMP"
+noisily display "   	📁 DATA_CLEAN:     $DATA_CLEAN"
+noisily display "--------------------------------------------"
+noisily display "📁 OUTPUT:            $OUTPUT"
+noisily display "	📁 FIGURE:           $OUTPUT_FIGURE"
+noisily display "	📁 TABLE:            $OUTPUT_TABLE"
+noisily display "--------------------------------------------"
+}

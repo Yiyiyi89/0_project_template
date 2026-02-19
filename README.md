@@ -15,27 +15,26 @@ The template structure follows the [Guide by Matthew Gentzkow and Jesse M. Shapi
 ## <font size=5>Directory Structure</font>
 
 ```text
-├── analysis            # Analysis phase
-│   ├── code            # Analysis code
-│   └── data
+├── build                # Data construction phase
+│   ├── code             # Data processing code
+│   └── data          
+│       ├── raw          # Raw data (1) 
+|       |    ↓         
+│       ├── temp         # Temporary files, merge keys, etc. (2) 
+|       |    ↓        
+│       └── processed→|  # Processed databases (3) 
+├── analysis          |  # Analysis phase
+│   ├── code          |  # Analysis code
+│   └── data          | 
 │       ├── input←←←←←| # Panel data for descriptive stats and regressions(4) 
-|       |    ↓        |
-│       └── output    | # Generated tables and figures (5)
-├── build             | # Data construction phase
-│   ├── code          | # Data processing code
-│   └── data          |
-│       ├── raw       | # Raw data (1) 
-|       |    ↓        | 
-│       ├── temp      | # Temporary files, merge keys, etc. (2) 
-|       |    ↓        |
-│       └── processed→| # Processed databases (3) 
+|       |    ↓        
+│       └── output      # Generated tables and figures (5)
 ├── README.md           # Project documentation
 ├── README.py           # Directory tree generator
 └── resource            # Related papers and materials
 
 
 ```
-
 ## <font size=5>Usage Guide</font>
 
 ### 1. Data Management
