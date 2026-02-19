@@ -18,8 +18,8 @@ DATA_TEMP = DATA / "temp"
 #     Output Area
 # ————————————————————————————— #
 OUTPUT = PARENT / "output"
-FIGURE = OUTPUT / "figure"
-TABLE = OUTPUT / "table"
+OUTPUT_FIGURE = OUTPUT / "figure"
+OUTPUT_TABLE = OUTPUT / "table"
 
 
 # ————————————————————————————— #
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     print("|  DATA_CLEAN:     ", DATA_CLEAN)
     print("|" + "-" * 78)
 
-    print("|OUTPUT:           ", OUTPUT)
-    print("|  FIGURE:         ", FIGURE)
-    print("|  TABLE:          ", TABLE)
+    print("|OUTPUT:                   ", OUTPUT)
+    print("|  OUTPUT_FIGURE:          ", OUTPUT_FIGURE)
+    print("|  OUTPUT_TABLE:           ", OUTPUT_TABLE)
     print("|" + "-" * 78)
