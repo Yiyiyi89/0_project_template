@@ -10,16 +10,10 @@ PARENT = CODE.parent
 #     Data Area
 # ————————————————————————————— #
 DATA = PARENT / "data"
-DATA_RAW = DATA / "raw"
-DATA_CLEAN = DATA / "clean"
+DATA_INPUT = DATA / "input"
 DATA_TEMP = DATA / "temp"
-
-# ————————————————————————————— #
-#     Output Area
-# ————————————————————————————— #
-OUTPUT = PARENT / "output"
-OUTPUT_FIGURE = OUTPUT / "figure"
-OUTPUT_TABLE = OUTPUT / "table"
+DATA_OUTPUT = DATA / "output"
+DATA_RESULTS = DATA / "tables_and_figures"
 
 
 # ————————————————————————————— #
@@ -32,12 +26,8 @@ if __name__ == "__main__":
     print("|" + "-" * 78)
 
     print("|DATA:             ", DATA)
-    print("|  DATA_RAW:       ", DATA_RAW)
+    print("|  DATA_INPUT:     ", DATA_INPUT)
     print("|  DATA_TEMP:      ", DATA_TEMP)
-    print("|  DATA_CLEAN:     ", DATA_CLEAN)
-    print("|" + "-" * 78)
-
-    print("|OUTPUT:                   ", OUTPUT)
-    print("|  OUTPUT_FIGURE:          ", OUTPUT_FIGURE)
-    print("|  OUTPUT_TABLE:           ", OUTPUT_TABLE)
+    print("|  DATA_OUTPUT:    ", DATA_OUTPUT)
+    print("|  DATA_RESULTS:   ", DATA_RESULTS)
     print("|" + "-" * 78)

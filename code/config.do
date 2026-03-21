@@ -3,7 +3,7 @@
 * 📁  Current Packages Configuration
 ****************************************************
 // List all the packages to be installed
-local pkgs estout spmap shp2dta mif2dta egenmore binscatter ftools reghdfe ivreg2 ranktest ivreghdfe csdid eventstudyinteract
+local pkgs estout spmap shp2dta mif2dta egenmore binscatter ftools reghdfe ivreg2 ranktest ivreghdfe csdid eventstudyinteract parquet
 
 qui {
 // 2. Loop over each package, check with ssc describe, install if missing
@@ -20,7 +20,6 @@ foreach pkg of local pkgs {
         }
     }
     else if "`pkg'" == "ivreghdfe" {
-        // use help to check if the package is installed
         capture which `pkg'.ado
         if _rc {
             display "📦 Installing ivreghdfe..."
@@ -28,6 +27,16 @@ foreach pkg of local pkgs {
         }
         else {
             display "✔ ivreghdfe is already installed."
+        }
+    }
+    else if "`pkg'" == "parquet" {
+        capture which parquet.ado
+        if _rc {
+            display "📦 Installing parquet..."
+            net install parquet, from("https://raw.githubusercontent.com/mcaceresb/stata-parquet/master/build/") replace
+        }
+        else {
+            display "✔ parquet is already installed."
         }
     }
     else {
@@ -83,14 +92,11 @@ end
 * 📁 Main project folders
 ****************************************************
 
-global DATA             "$PARENT${sep}data"  
-global DATA_RAW         "$DATA${sep}raw"                
-global DATA_CLEAN       "$DATA${sep}clean"                
-global DATA_TEMP        "$DATA${sep}temp"            
-
-global OUTPUT           "$PARENT${sep}output"
-global OUTPUT_FIGURE    "$OUTPUT${sep}figure"
-global OUTPUT_TABLE     "$OUTPUT${sep}table"
+global DATA             "$PARENT${sep}data"
+global DATA_INPUT       "$DATA${sep}input"
+global DATA_TEMP        "$DATA${sep}temp"
+global DATA_OUTPUT      "$DATA${sep}output"
+global DATA_RESULTS     "$DATA${sep}tables_and_figures"
 }
 
 ****************************************************
@@ -105,12 +111,9 @@ noisily display "--------------------------------------------"
 noisily display "📁 PARENT:            $PARENT"
 noisily display "--------------------------------------------"
 noisily display "📁 DATA:              $DATA"
-noisily display "   	📁 DATA_RAW:       $DATA_RAW"
+noisily display "   	📁 DATA_INPUT:     $DATA_INPUT"
 noisily display "   	📁 DATA_TEMP:      $DATA_TEMP"
-noisily display "   	📁 DATA_CLEAN:     $DATA_CLEAN"
-noisily display "--------------------------------------------"
-noisily display "📁 OUTPUT:            $OUTPUT"
-noisily display "	📁 FIGURE:           $OUTPUT_FIGURE"
-noisily display "	📁 TABLE:            $OUTPUT_TABLE"
+noisily display "   	📁 DATA_OUTPUT:    $DATA_OUTPUT"
+noisily display "   	📁 DATA_RESULTS:   $DATA_RESULTS"
 noisily display "--------------------------------------------"
 }

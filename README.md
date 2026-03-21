@@ -15,22 +15,23 @@ The template structure follows the [Guide by Matthew Gentzkow and Jesse M. Shapi
 ## <font size=5>Directory Structure</font>
 
 ```text
-├── code                 # All code (data processing and analysis)
-│   ├── config.py        # Python path configuration
-│   ├── config.do        # Stata path configuration
-│   ├── toolkit.py       # Utility functions
-│   ├── data_merge_template.py  # Data merging template
-│   └── variables_record.py     # Variable documentation
-├── data                 # Data directory
-│   ├── raw              # Raw data (read-only) (1)
+├── code                         # All code (data processing and analysis)
+│   ├── config.py                # Python path configuration
+│   ├── config.do                # Stata path configuration
+│   ├── step1_import_and_clean.py   # Import raw data, clean, save to temp/
+│   ├── step2_merge.py              # Merge datasets, save merge key to temp/
+│   ├── step3_build_up_panel.py     # Build panel, save to output/
+│   ├── step4_panels.do             # Load parquet panel, construct variables
+│   ├── step5_tables.do             # Regression tables → tables_and_figures/
+│   └── step5_figures.do            # Figures → tables_and_figures/
+├── data                         # Data directory
+│   ├── input                    # Raw input data (read-only) (1)
 │   │    ↓
-│   ├── temp             # Temporary files, merge keys, etc. (2)
+│   ├── temp                     # Intermediate files, merge keys (2)
 │   │    ↓
-│   └── clean            # Cleaned/processed data (3)
-│        ↓
-├── output               # Analysis outputs
-│   ├── figure           # Generated figures (4)
-│   └── table            # Generated tables (5)
+│   ├── output                   # Analysis-ready panels (3)
+│   │    ↓
+│   └── tables_and_figures       # Tables and figures (4)
 ├── resource             # Related papers and materials
 ├── README.md            # Project documentation
 └── README.py            # Directory tree generator
@@ -39,20 +40,20 @@ The template structure follows the [Guide by Matthew Gentzkow and Jesse M. Shapi
 ## <font size=5>Usage Guide</font>
 
 ### 1. Data Management
-- `data/raw`: Store raw data (read-only)
+- `data/input`: Store raw input data (read-only)
 - `data/temp`: Store temporary files, merge keys, and intermediate files
-- `data/clean`: Store cleaned and processed data
-- `output/figure`: Store generated figures
-- `output/table`: Store generated tables
+- `data/output`: Store analysis-ready panels
+- `data/tables_and_figures`: Store generated tables and figures
 
 ### 2. Code Organization
 - `code/`: Contains all code (data processing and analysis)
-  - `config.py`: Python path configuration (defines CODE, PARENT, DATA, OUTPUT paths)
-  - `config.do`: Stata path configuration (defines $CODE, $PARENT, $DATA, $OUTPUT globals)
-  - `toolkit.py`: Utility functions for data processing
-  - `data_merge_template.py`: Template for data merging operations
-  - `variables_record.py`: Variable documentation and metadata
-- Each code file should have clear documentation
+  - `config.py` / `config.do`: Path configuration (see §4 Configuration)
+  - `step1_import_and_clean.py`: Import from `input/`, clean, save `temp/[data]_[level].parquet`
+  - `step2_merge.py`: Merge datasets, save `temp/key_[data1]_[data2].parquet`
+  - `step3_build_up_panel.py`: Build panel, save `output/panel_[level].parquet`
+  - `step4_panels.do`: Load parquet via `pq use`, construct variables, save `output/panel_[level].dta`
+  - `step5_tables.do`: Regression tables → `tables_and_figures/table_[des].xls/.tex`
+  - `step5_figures.do`: Figures → `tables_and_figures/figure_[des].png`
 
 ### 3. Version Control
 - Use `.gitignore` for large data files
@@ -61,11 +62,14 @@ The template structure follows the [Guide by Matthew Gentzkow and Jesse M. Shapi
 
 ### 4. Configuration
 - **Python**: Use `code/config.py` for path configuration
-  - Variables: `CODE`, `PARENT`, `DATA`, `DATA_RAW`, `DATA_CLEAN`, `DATA_TEMP`, `OUTPUT`, `OUTPUT_FIGURE`, `OUTPUT_TABLE`
-  - Import with: `from config import *` or `import config`
+  - `CODE`, `PARENT`, `DATA`
+  - `DATA_INPUT`, `DATA_TEMP`, `DATA_OUTPUT`, `DATA_RESULTS`
+  - Import with: `from config import DATA_INPUT, DATA_TEMP` etc.
 - **Stata**: Use `code/config.do` for path configuration
-  - Globals: `$CODE`, `$PARENT`, `$DATA`, `$DATA_RAW`, `$DATA_CLEAN`, `$DATA_TEMP`, `$OUTPUT`, `$OUTPUT_FIGURE`, `$OUTPUT_TABLE`
-  - Run with: `do code/config.do`
+  - `$CODE`, `$PARENT`, `$DATA`
+  - `$DATA_INPUT`, `$DATA_TEMP`, `$DATA_OUTPUT`, `$DATA_RESULTS`
+  - Run with: `do "config.do"` (from within the `code/` directory)
+  - Packages auto-installed on first run
 - Both config files use the same variable names for consistency across languages
 
 ## <font size=5>Best Practices</font>
