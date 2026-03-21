@@ -2,7 +2,7 @@
 # step3_build_up_panel.py
 # Input  : temp/key_[data1]_[data2].parquet
 #          temp/[data]_[level].parquet
-# Output : output/panel_[level].parquet
+# Output : temp/panel_[level].parquet
 #            e.g. panel_firm_year.parquet
 #                 panel_state_year.parquet
 # ****************************************************
@@ -11,7 +11,7 @@ import os
 import pandas as pd
 import numpy as np
 
-from config import DATA_TEMP, DATA_OUTPUT
+from config import DATA_TEMP
 
 """
 Load
@@ -54,9 +54,9 @@ Construct variables
 
 """
 Save
-Naming convention: output/panel_[level].parquet
+Naming convention: temp/panel_[level].parquet
   e.g. panel_firm_year.parquet
        panel_state_year.parquet
 """
-df.to_parquet(os.path.join(DATA_OUTPUT, "panel_firm_year.parquet"), index=False)
-print("Saved to DATA_OUTPUT")
+df.to_parquet(os.path.join(DATA_TEMP, "panel_firm_year.parquet"), index=False)
+print("Saved to DATA_TEMP")

@@ -1,6 +1,6 @@
 ****************************************************
 * step4_panels.do
-* Input  : output/panel_[level].parquet
+* Input  : temp/panel_[level].parquet
 *            e.g. panel_firm_year.parquet
 * Output : output/panel_[level].dta
 *            e.g. panel_firm_year.dta
@@ -12,7 +12,7 @@ do "config.do"
 * Load parquet  (requires: ssc install parquet)
 ****************************************************
 
-pq use "$DATA_OUTPUT/panel_firm_year.parquet", clear
+pq use "$DATA_TEMP/panel_firm_year.parquet", clear
 
 xtset firm_id year
 

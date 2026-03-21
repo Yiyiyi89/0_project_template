@@ -50,7 +50,7 @@ The template structure follows the [Guide by Matthew Gentzkow and Jesse M. Shapi
   - `config.py` / `config.do`: Path configuration (see §4 Configuration)
   - `step1_import_and_clean.py`: Import from `input/`, clean, save `temp/[data]_[level].parquet`
   - `step2_merge.py`: Merge datasets, save `temp/key_[data1]_[data2].parquet`
-  - `step3_build_up_panel.py`: Build panel, save `output/panel_[level].parquet`
+  - `step3_build_up_panel.py`: Build panel, save `temp/panel_[level].parquet`
   - `step4_panels.do`: Load parquet via `pq use`, construct variables, save `output/panel_[level].dta`
   - `step5_tables.do`: Regression tables → `tables_and_figures/table_[des].xls/.tex`
   - `step5_figures.do`: Figures → `tables_and_figures/figure_[des].png`
