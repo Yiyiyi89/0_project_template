@@ -11,6 +11,8 @@ PARENT = CODE.parent
 # ————————————————————————————— #
 DATA = PARENT / "data"
 DATA_INPUT = DATA / "input"
+DATA_RAW = DATA / "raw"
+DATA_RAW_WRDS = DATA_RAW / "wrds"
 DATA_TEMP = DATA / "temp"
 DATA_OUTPUT = DATA / "output"
 DATA_RESULTS = DATA / "tables_and_figures"
