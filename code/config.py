@@ -21,6 +21,13 @@ OUTPUT         = PARENT / "output"
 OUTPUT_TABLES  = OUTPUT / "tables"
 OUTPUT_FIGURES = OUTPUT / "figures"
 
+# ————————————————————————————— #
+#     Output Area
+# ————————————————————————————— #
+OUTPUT = PARENT / "output"
+OUTPUT_FIGURES = OUTPUT / "figures"
+OUTPUT_TABLES = OUTPUT / "tables"
+
 
 # ————————————————————————————— #
 #     Debug / Display
@@ -40,4 +47,9 @@ if __name__ == "__main__":
     print("|OUTPUT:               ", OUTPUT)
     print("|  OUTPUT_TABLES:      ", OUTPUT_TABLES)
     print("|  OUTPUT_FIGURES:     ", OUTPUT_FIGURES)
+    print("|" + "-" * 78)
+
+    print("|OUTPUT:           ", OUTPUT)
+    print("|  OUTPUT_FIGURES: ", OUTPUT_FIGURES)
+    print("|  OUTPUT_TABLES:  ", OUTPUT_TABLES)
     print("|" + "-" * 78)
