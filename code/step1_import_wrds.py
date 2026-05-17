@@ -1,11 +1,13 @@
 # ****************************************************
 # step1_import_wrds.py
 # Input  : WRDS (comp.funda, ibes.det_guidance,
-#           wrdssec.wrds_sec_8k, tr.tr_transcript)
+#           wrdssec.wrds_sec_8k, tr.tr_transcript,
+#           execcomp.anncomp)
 # Output : temp/compustat_firm_year.parquet
 #          temp/guidance_firm_year.parquet
 #          temp/eightk_firm_year.parquet
 #          temp/confcall_firm_year.parquet
+#          temp/ceo_firm_year.parquet
 # ****************************************************
 
 import os
@@ -157,6 +159,35 @@ print(f"Conf call firm-year: {confcall_fy.shape[0]:,} rows  ({confcall_fy['gvkey
 
 confcall_fy.to_parquet(os.path.join(DATA_TEMP, "confcall_firm_year.parquet"), index=False)
 print("Saved: confcall_firm_year.parquet")
+
+# ==============================================================
+#  5. ExecuComp: CEO names
+# ==============================================================
+"""
+ExecuComp Annual Compensation
+- CEO identification via ceoann flag
+"""
+ceo = db.raw_sql("""
+    SELECT gvkey, year, exec_fullname, coname,
+           ceoann, titleann, gender, age,
+           becameceo, joined_co, leftofc,
+           salary, bonus, tdc1, tdc2
+    FROM execcomp.anncomp
+    WHERE ceoann = 'CEO'
+      AND year >= 2014
+""")
+
+print(f"\nExecuComp CEO raw: {ceo.shape[0]:,} rows")
+
+ceo["becameceo"] = pd.to_datetime(ceo["becameceo"], errors="coerce")
+ceo["leftofc"]   = pd.to_datetime(ceo["leftofc"], errors="coerce")
+ceo["tenure_years"] = (pd.to_datetime(ceo["year"].astype(str) + "-12-31") - ceo["becameceo"]).dt.days / 365.25
+
+ceo = ceo.drop_duplicates(subset=["gvkey", "year"])
+print(f"CEO firm-year: {ceo.shape[0]:,} rows  ({ceo['gvkey'].nunique():,} firms)")
+
+ceo.to_parquet(os.path.join(DATA_TEMP, "ceo_firm_year.parquet"), index=False)
+print("Saved: ceo_firm_year.parquet")
 
 # ==============================================================
 db.close()
