@@ -3,7 +3,7 @@
 * 📁  Current Packages Configuration
 ****************************************************
 // List all the packages to be installed
-local pkgs estout spmap shp2dta mif2dta egenmore binscatter ftools reghdfe ivreg2 ranktest ivreghdfe csdid eventstudyinteract parquet
+local pkgs estout spmap shp2dta mif2dta egenmore binscatter ftools reghdfe ivreg2 ranktest ivreghdfe csdid eventstudyinteract bacondecomp coefplot outreg2 honestdid fect _gwtmean
 
 qui {
 // 2. Loop over each package, check with ssc describe, install if missing
@@ -20,6 +20,7 @@ foreach pkg of local pkgs {
         }
     }
     else if "`pkg'" == "ivreghdfe" {
+        // use help to check if the package is installed
         capture which `pkg'.ado
         if _rc {
             display "📦 Installing ivreghdfe..."
@@ -29,14 +30,14 @@ foreach pkg of local pkgs {
             display "✔ ivreghdfe is already installed."
         }
     }
-    else if "`pkg'" == "parquet" {
-        capture which parquet.ado
+    else if "`pkg'" == "fect" {
+        capture which fect.ado
         if _rc {
-            display "📦 Installing parquet..."
-            net install parquet, from("https://raw.githubusercontent.com/mcaceresb/stata-parquet/master/build/") replace
+            display "📦 Installing fect..."
+            net install fect, from("https://raw.githubusercontent.com/xuyiqing/fect_stata/master/") replace
         }
         else {
-            display "✔ parquet is already installed."
+            display "✔ fect is already installed."
         }
     }
     else {
@@ -93,10 +94,13 @@ end
 ****************************************************
 
 global DATA             "$PARENT${sep}data"
-global DATA_INPUT       "$DATA${sep}input"
+global DATA_RAW         "$DATA${sep}raw"
 global DATA_TEMP        "$DATA${sep}temp"
-global DATA_OUTPUT      "$DATA${sep}output"
-global DATA_RESULTS     "$DATA${sep}tables_and_figures"
+global DATA_PROCESSED   "$DATA${sep}processed"
+
+global OUTPUT           "$PARENT${sep}output"
+global OUTPUT_TABLES    "$OUTPUT${sep}tables"
+global OUTPUT_FIGURES   "$OUTPUT${sep}figures"
 }
 
 ****************************************************
@@ -111,9 +115,12 @@ noisily display "--------------------------------------------"
 noisily display "📁 PARENT:            $PARENT"
 noisily display "--------------------------------------------"
 noisily display "📁 DATA:              $DATA"
-noisily display "   	📁 DATA_INPUT:     $DATA_INPUT"
-noisily display "   	📁 DATA_TEMP:      $DATA_TEMP"
-noisily display "   	📁 DATA_OUTPUT:    $DATA_OUTPUT"
-noisily display "   	📁 DATA_RESULTS:   $DATA_RESULTS"
+noisily display "   	📁 DATA_RAW:          $DATA_RAW"
+noisily display "   	📁 DATA_TEMP:         $DATA_TEMP"
+noisily display "   	📁 DATA_PROCESSED:    $DATA_PROCESSED"
+noisily display "--------------------------------------------"
+noisily display "📁 OUTPUT:            $OUTPUT"
+noisily display "   	📁 OUTPUT_TABLES:     $OUTPUT_TABLES"
+noisily display "   	📁 OUTPUT_FIGURES:    $OUTPUT_FIGURES"
 noisily display "--------------------------------------------"
 }

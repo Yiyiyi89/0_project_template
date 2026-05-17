@@ -1,8 +1,8 @@
 ****************************************************
 * step4_panels.do
-* Input  : temp/panel_[level].parquet
+* Input  : data/temp/panel_[level].parquet
 *            e.g. panel_firm_year.parquet
-* Output : output/panel_[level].dta
+* Output : data/processed/panel_[level].dta
 *            e.g. panel_firm_year.dta
 ****************************************************
 
@@ -59,5 +59,5 @@ xtsum firm_id year
 *   e.g. panel_firm_year.dta
 ****************************************************
 
-save "$DATA_OUTPUT/panel_firm_year.dta", replace
-* pq save "$DATA_OUTPUT/panel_firm_year.parquet", replace
+save "$DATA_PROCESSED/panel_firm_year.dta", replace
+* pq save "$DATA_PROCESSED/panel_firm_year.parquet", replace

@@ -12,6 +12,13 @@
 *.db
 *.sqlite
 *.sqlite3
+*.dta
+*.png
+*.jpg
+*.json
+*.txt
+*.rcv
+*.htm
 
 # Ignore temporary files
 *.tmp
@@ -20,6 +27,7 @@
 *.bak
 *.swp
 *~
+tempCodeRunnerFile.do
 
 # Ignore build files
 build/
@@ -40,6 +48,7 @@ ENV/
 # Ignore IDE files
 .idea/
 .vscode/
+.claude/*
 *.sublime-workspace
 *.sublime-project
 
@@ -59,15 +68,16 @@ analysis/data/*
 !*/
 !.gitkeep
 
+# Re-ignore .claude/ after the !*/ override above
+.claude/
+
 # Keep code files
 !*.py
 !*.do
 !*.ipynb
 !*.md
-!*.txt
 !*.sh
 !*.bat
 !*.yaml
 !*.yml
-!*.json
 !*.config 
