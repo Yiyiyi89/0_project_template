@@ -1,13 +1,13 @@
 # ****************************************************
 # step1_import_wrds.py
-# Input  : WRDS (comp.funda, ibes.det_guidance,
+# Input  : WRDS (comp.fundq, ibes.det_guidance,
 #           wrdssec.items8k, ciq_transcripts,
 #           execcomp.anncomp)
-# Output : raw/wrds/compustat_firm_year.parquet
-#          raw/wrds/guidance_firm_year.parquet
-#          raw/wrds/eightk_firm_year.parquet
-#          raw/wrds/confcall_firm_year.parquet
-#          raw/wrds/ceo_firm_year.parquet
+# Output : raw/wrds/compustat_fm_qt.parquet
+#          raw/wrds/guidance_fm_qt.parquet
+#          raw/wrds/eightk_fm_qt.parquet
+#          raw/wrds/confcall_fm_qt.parquet
+#          raw/wrds/ceo_fm_yr.parquet
 # ****************************************************
 
 import os
@@ -25,44 +25,43 @@ WRDS_PASS = os.environ["WRDS_PASSWORD"]
 db = wrds.Connection(wrds_username=WRDS_USER, wrds_password=WRDS_PASS)
 
 # ==============================================================
-#  1. Compustat: firm-level controls
+#  1. Compustat Quarterly: firm-level controls
 # ==============================================================
 """
-Compustat Annual Fundamentals
+Compustat Quarterly Fundamentals
 """
 compustat = db.raw_sql("""
-    SELECT gvkey, datadate, fyear, conm,
-           at, lt, dltt, dlc, ceq, csho, prcc_f,
-           sale, revt, ni, ib, oancf, xrd, xad, xsga,
-           dp, capx, ppent, act, lct, che, invt,
-           txt, pi, mkvalt
-    FROM comp.funda
+    SELECT gvkey, datadate, fyearq, fqtr, conm,
+           atq, ltq, dlttq, dlcq, ceqq, cshoq, prccq,
+           saleq, revtq, niq, ibq, oancfy, xrdq, xsgaq,
+           dpq, capxy, ppentq, actq, lctq, cheq, invtq,
+           txtq, piq, mkvaltq
+    FROM comp.fundq
     WHERE indfmt = 'INDL'
       AND datafmt = 'STD'
       AND popsrc = 'D'
       AND consol = 'C'
-      AND fyear >= 2014
+      AND fyearq >= 2014
 """)
 
-print(f"Compustat raw: {compustat.shape[0]:,} rows")
+print(f"Compustat quarterly raw: {compustat.shape[0]:,} rows")
 
-compustat["size"]      = np.log(compustat["at"].clip(lower=1))
-compustat["leverage"]  = (compustat["dltt"] + compustat["dlc"]) / compustat["at"]
-compustat["roa"]       = compustat["ni"] / compustat["at"]
-compustat["mtb"]       = (compustat["csho"] * compustat["prcc_f"]) / compustat["ceq"]
-compustat["sale_growth"] = compustat.sort_values(["gvkey", "fyear"]).groupby("gvkey")["sale"].pct_change(fill_method=None)
-compustat["loss"]      = np.where(compustat["ni"].isna(), np.nan, (compustat["ni"] < 0).astype(float))
-compustat["rd_int"]    = compustat["xrd"].fillna(0) / compustat["at"]
-compustat["ad_int"]    = compustat["xad"].fillna(0) / compustat["at"]
-compustat["capx_int"]  = compustat["capx"].fillna(0) / compustat["at"]
-compustat["cfo"]       = compustat["oancf"] / compustat["at"]
-compustat["tangibility"] = compustat["ppent"] / compustat["at"]
+compustat["size"]      = np.log(compustat["atq"].clip(lower=1))
+compustat["leverage"]  = (compustat["dlttq"] + compustat["dlcq"]) / compustat["atq"]
+compustat["roa"]       = compustat["niq"] / compustat["atq"]
+compustat["mtb"]       = (compustat["cshoq"] * compustat["prccq"]) / compustat["ceqq"]
+compustat = compustat.sort_values(["gvkey", "fyearq", "fqtr"]).reset_index(drop=True)
+compustat["sale_growth"] = compustat.groupby("gvkey")["saleq"].pct_change(fill_method=None)
+compustat["loss"]      = np.where(compustat["niq"].isna(), np.nan, (compustat["niq"] < 0).astype(float))
+compustat["rd_int"]    = compustat["xrdq"].fillna(0) / compustat["atq"]
+compustat["cfo"]       = compustat["oancfy"] / compustat["atq"]
+compustat["tangibility"] = compustat["ppentq"] / compustat["atq"]
 
-compustat = compustat.drop_duplicates(subset=["gvkey", "fyear"])
+compustat = compustat.drop_duplicates(subset=["gvkey", "fyearq", "fqtr"])
 print(f"Compustat clean: {compustat.shape[0]:,} rows  ({compustat['gvkey'].nunique():,} firms)")
 
-compustat.to_parquet(os.path.join(DATA_RAW_WRDS, "compustat_firm_year.parquet"), index=False)
-print("Saved: compustat_firm_year.parquet")
+compustat.to_parquet(os.path.join(DATA_RAW_WRDS, "compustat_fm_qt.parquet"), index=False)
+print("Saved: compustat_fm_qt.parquet")
 
 # ==============================================================
 #  2. IBES Guidance: voluntary disclosure (management forecasts)
@@ -70,7 +69,6 @@ print("Saved: compustat_firm_year.parquet")
 """
 Management Earnings Guidance (det_guidance)
 - frequency, precision, horizon of forecasts
-- uses tr_ibes schema (Thomson Reuters IBES)
 """
 try:
     guidance = db.raw_sql("""
@@ -89,8 +87,10 @@ try:
     guidance["range_width"] = (guidance["val_2"] - guidance["val_1"]).abs()
     guidance["horizon"]     = (pd.to_datetime(guidance["prd_yr"].astype(int).astype(str) + "-12-31", errors="coerce") - pd.to_datetime(guidance["anndats"])).dt.days
 
-    guidance["year"] = pd.to_datetime(guidance["anndats"]).dt.year
-    guid_fy = guidance.groupby(["ticker", "year"]).agg(
+    guidance["year"]    = pd.to_datetime(guidance["anndats"]).dt.year
+    guidance["quarter"] = pd.to_datetime(guidance["anndats"]).dt.quarter
+
+    guid_fq = guidance.groupby(["ticker", "year", "quarter"]).agg(
         n_forecasts     = ("anndats", "count"),
         n_point         = ("is_point", "sum"),
         n_range         = ("is_range", "sum"),
@@ -98,12 +98,12 @@ try:
         avg_horizon     = ("horizon", "mean"),
     ).reset_index()
 
-    guid_fy["frac_point"] = guid_fy["n_point"] / guid_fy["n_forecasts"]
+    guid_fq["frac_point"] = guid_fq["n_point"] / guid_fq["n_forecasts"]
 
-    print(f"Guidance firm-year: {guid_fy.shape[0]:,} rows  ({guid_fy['ticker'].nunique():,} firms)")
+    print(f"Guidance fm_qt: {guid_fq.shape[0]:,} rows  ({guid_fq['ticker'].nunique():,} firms)")
 
-    guid_fy.to_parquet(os.path.join(DATA_RAW_WRDS, "guidance_firm_year.parquet"), index=False)
-    print("Saved: guidance_firm_year.parquet")
+    guid_fq.to_parquet(os.path.join(DATA_RAW_WRDS, "guidance_fm_qt.parquet"), index=False)
+    print("Saved: guidance_fm_qt.parquet")
 except Exception as e:
     print(f"\n** IBES guidance skipped (no access): {e.__class__.__name__}")
 
@@ -112,7 +112,6 @@ except Exception as e:
 # ==============================================================
 """
 SEC 8-K Filings (wrdssec.items8k)
-- item types indicate disclosure type
 """
 eightk = db.raw_sql("""
     SELECT cik, coname, fdate, form, accession,
@@ -123,25 +122,24 @@ eightk = db.raw_sql("""
 
 print(f"\n8-K raw: {eightk.shape[0]:,} rows")
 
-eightk["year"] = pd.to_datetime(eightk["fdate"]).dt.year
+eightk["year"]    = pd.to_datetime(eightk["fdate"]).dt.year
+eightk["quarter"] = pd.to_datetime(eightk["fdate"]).dt.quarter
 
-eightk_fy = eightk.groupby(["cik", "year"]).agg(
+eightk_fq = eightk.groupby(["cik", "year", "quarter"]).agg(
     n_8k_filings = ("accession", "nunique"),
     n_8k_items   = ("item", "count"),
 ).reset_index()
 
-print(f"8-K firm-year: {eightk_fy.shape[0]:,} rows  ({eightk_fy['cik'].nunique():,} firms)")
+print(f"8-K fm_qt: {eightk_fq.shape[0]:,} rows  ({eightk_fq['cik'].nunique():,} firms)")
 
-eightk_fy.to_parquet(os.path.join(DATA_RAW_WRDS, "eightk_firm_year.parquet"), index=False)
-print("Saved: eightk_firm_year.parquet")
+eightk_fq.to_parquet(os.path.join(DATA_RAW_WRDS, "eightk_fm_qt.parquet"), index=False)
+print("Saved: eightk_fm_qt.parquet")
 
 # ==============================================================
 #  4. Conference Calls: manager's public speaking
 # ==============================================================
 """
 Capital IQ Transcripts (earnings calls, investor days)
-- use ciq_transcripts.wrds_transcript_detail
-- link to gvkey via ciq_common.wrds_gvkey
 """
 confcall = db.raw_sql("""
     SELECT t.companyid, t.companyname, t.transcriptid,
@@ -156,25 +154,27 @@ confcall = db.raw_sql("""
 
 print(f"\nConf calls raw: {confcall.shape[0]:,} rows")
 
-confcall["year"] = pd.to_datetime(confcall["call_date"]).dt.year
+confcall["year"]    = pd.to_datetime(confcall["call_date"]).dt.year
+confcall["quarter"] = pd.to_datetime(confcall["call_date"]).dt.quarter
 
-confcall_fy = confcall.groupby(["gvkey", "year"]).agg(
+confcall_fq = confcall.groupby(["gvkey", "year", "quarter"]).agg(
     n_conf_calls    = ("transcriptid", "count"),
     n_earnings_call = ("eventtype", lambda x: (x == "Earnings Call").sum()),
 ).reset_index()
 
-confcall_fy = confcall_fy.dropna(subset=["gvkey"])
-print(f"Conf call firm-year: {confcall_fy.shape[0]:,} rows  ({confcall_fy['gvkey'].nunique():,} firms)")
+confcall_fq = confcall_fq.dropna(subset=["gvkey"])
+print(f"Conf call fm_qt: {confcall_fq.shape[0]:,} rows  ({confcall_fq['gvkey'].nunique():,} firms)")
 
-confcall_fy.to_parquet(os.path.join(DATA_RAW_WRDS, "confcall_firm_year.parquet"), index=False)
-print("Saved: confcall_firm_year.parquet")
+confcall_fq.to_parquet(os.path.join(DATA_RAW_WRDS, "confcall_fm_qt.parquet"), index=False)
+print("Saved: confcall_fm_qt.parquet")
 
 # ==============================================================
-#  5. ExecuComp: CEO names
+#  5. ExecuComp: CEO names (annual only)
 # ==============================================================
 """
 ExecuComp Annual Compensation
 - CEO identification via ceoann flag
+- annual granularity (no quarterly in ExecuComp)
 """
 ceo = db.raw_sql("""
     SELECT gvkey, year, exec_fullname, coname,
@@ -193,10 +193,10 @@ ceo["leftofc"]   = pd.to_datetime(ceo["leftofc"], errors="coerce")
 ceo["tenure_years"] = (pd.to_datetime(ceo["year"].astype(int).astype(str) + "-12-31", format="%Y-%m-%d") - ceo["becameceo"]).dt.days / 365.25
 
 ceo = ceo.drop_duplicates(subset=["gvkey", "year"])
-print(f"CEO firm-year: {ceo.shape[0]:,} rows  ({ceo['gvkey'].nunique():,} firms)")
+print(f"CEO fm_yr: {ceo.shape[0]:,} rows  ({ceo['gvkey'].nunique():,} firms)")
 
-ceo.to_parquet(os.path.join(DATA_RAW_WRDS, "ceo_firm_year.parquet"), index=False)
-print("Saved: ceo_firm_year.parquet")
+ceo.to_parquet(os.path.join(DATA_RAW_WRDS, "ceo_fm_yr.parquet"), index=False)
+print("Saved: ceo_fm_yr.parquet")
 
 # ==============================================================
 db.close()
