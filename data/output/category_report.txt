@@ -1,0 +1,826 @@
+======================================================================
+POLYMARKET CATEGORY REPORT
+Total markets: 1,121,105
+======================================================================
+
+CATEGORY DISTRIBUTION
+--------------------------------------------------
+  sports                   491,725  ( 43.9%)
+  crypto                   426,797  ( 38.1%)
+  unknown                   76,708  (  6.8%)
+  weather                   46,569  (  4.2%)
+  politics                  28,202  (  2.5%)
+  business                  16,824  (  1.5%)
+  culture                   14,362  (  1.3%)
+  tech                       7,219  (  0.6%)
+  economics                  5,808  (  0.5%)
+  geopolitics                4,494  (  0.4%)
+  commodities                1,920  (  0.2%)
+  science                      466  (  0.0%)
+  parse_error                   11  (  0.0%)
+
+
+======================================================================
+  POLITICS (28,202 markets)
+======================================================================
+
+  Subcategories:
+    other                                                   12,365 (43.8%)
+    Domestic political events                                6,818 (24.2%)
+    Presidential & Congressional elections                   4,419 (15.7%)
+    Global elections                                         3,772 (13.4%)
+    Policy & legislation outcomes                              560 ( 2.0%)
+    International diplomacy                                    136 ( 0.5%)
+    Iran & sanctions                                            50 ( 0.2%)
+    Canadian elections                                          32 ( 0.1%)
+    Federal Reserve & interest rates                            12 ( 0.0%)
+    Provincial elections                                        10 ( 0.0%)
+    Philippine general election                                  5 ( 0.0%)
+    Canada elections                                             5 ( 0.0%)
+    Hungarian parliamentary election                             3 ( 0.0%)
+    Brazilian elections                                          3 ( 0.0%)
+    Russia & Ukraine                                             3 ( 0.0%)
+    Canadian Election                                            2 ( 0.0%)
+    UK elections                                                 2 ( 0.0%)
+    California Governor                                          2 ( 0.0%)
+    Japan elections                                              1 ( 0.0%)
+    US Senate elections                                          1 ( 0.0%)
+    California Governor primary election                         1 ( 0.0%)
+
+  Persons: 28,437 mentions, 4,111 unique
+  Top 15:
+    Donald Trump                             10,789
+    Kamala Harris                              670
+    Joe Biden                                  521
+    Trump                                      486
+    Zohran Mamdani                             466
+    Keir Starmer                               435
+    Karoline Leavitt                           422
+    Jeffrey Epstein                            307
+    JD Vance                                   295
+    Volodymyr Zelenskyy                        287
+    Donald J. Trump                            273
+    Bernie Sanders                             239
+    Khamenei                                   230
+    Ted Cruz                                   206
+    Leavitt                                    205
+
+  Companies: 1,090 mentions, 104 unique
+  Top 15:
+    Truth Social                               153
+    Fox News                                   110
+    CNN                                         85
+    FiveThirtyEight                             62
+    McDonald's                                  55
+    ABC News                                    38
+    Univision                                   38
+    Associated Press                            36
+    CNBC                                        36
+    Fox                                         36
+    RealClearPolitics                           33
+    X                                           31
+    CBS                                         24
+    ABC                                         22
+    U.S. Steel                                  21
+
+  Organizations: 22,001 mentions, 2,021 unique
+  Top 15:
+    Democratic Party                         1,186
+    White House                              1,173
+    U.S. House of Representatives            1,120
+    Republican Party                         1,004
+    Democrat Party                             468
+    RealClearPolitics                          457
+    Silver Bulletin                            420
+    US government                              401
+    Palace of Westminster                      329
+    U.S. Senate                                268
+    NYC Mayor                                  186
+    House of Commons                           181
+    DNC                                        180
+    House of Representatives                   156
+    Trump Cabinet                              156
+
+  Monthly trend (2024+):
+    2024-01    193  ###
+    2024-02    108  ##
+    2024-03    361  #######
+    2024-04    184  ###
+    2024-05    206  ####
+    2024-06    238  ####
+    2024-07    362  #######
+    2024-08    680  #############
+    2024-09    696  #############
+    2024-10  1,108  ######################
+    2024-11    687  #############
+    2024-12    309  ######
+    2025-01    662  #############
+    2025-02    676  #############
+    2025-03    776  ###############
+    2025-04    831  ################
+    2025-05    784  ###############
+    2025-06    477  #########
+    2025-07    717  ##############
+    2025-08    749  ##############
+    2025-09    781  ###############
+    2025-10  1,239  ########################
+    2025-11  1,966  #######################################
+    2025-12  2,109  ##########################################
+    2026-01  2,391  ###############################################
+    2026-02  1,986  #######################################
+    2026-03  2,426  ################################################
+    2026-04  2,884  #########################################################
+    2026-05    859  #################
+
+======================================================================
+  CULTURE (14,362 markets)
+======================================================================
+
+  Subcategories:
+    other                                                    5,711 (39.8%)
+    Music & TV awards                                        2,671 (18.6%)
+    Box office gross                                         2,017 (14.0%)
+    Oscars & film awards                                     1,371 ( 9.5%)
+    Celebrity events                                         1,000 ( 7.0%)
+    TV awards                                                  349 ( 2.4%)
+    YouTube / Social Media                                     223 ( 1.6%)
+    YouTube / social media                                     222 ( 1.5%)
+    YouTube / Social media                                     148 ( 1.0%)
+    Visual art & auctions                                      137 ( 1.0%)
+    box office gross                                            59 ( 0.4%)
+    YouTube / online video                                      50 ( 0.3%)
+    TV                                                          40 ( 0.3%)
+    Eurovision                                                  34 ( 0.2%)
+    Film awards                                                 31 ( 0.2%)
+    Theater awards                                              31 ( 0.2%)
+    Miss Universe                                               29 ( 0.2%)
+    YouTube & social media                                      28 ( 0.2%)
+    The Bachelorette                                            23 ( 0.2%)
+    YouTube / Celebrity events                                  22 ( 0.2%)
+    Reality TV                                                  14 ( 0.1%)
+    TV shows                                                    14 ( 0.1%)
+    Dancing with the Stars                                      13 ( 0.1%)
+    Literary awards                                             13 ( 0.1%)
+    Anime awards                                                10 ( 0.1%)
+    Golden Globe awards                                          8 ( 0.1%)
+    Saturday Night Live                                          7 ( 0.0%)
+    Golden Globe Awards                                          7 ( 0.0%)
+    Esports / Chess / Poker                                      7 ( 0.0%)
+    Met Gala                                                     7 ( 0.0%)
+    TV ratings                                                   6 ( 0.0%)
+    YouTube & celebrity events                                   6 ( 0.0%)
+    YouTube views                                                6 ( 0.0%)
+    YouTube / celebrity content                                  5 ( 0.0%)
+    American Idol                                                5 ( 0.0%)
+    IMDb Top 250                                                 4 ( 0.0%)
+    Book awards                                                  4 ( 0.0%)
+    Movies                                                       3 ( 0.0%)
+    Emmys                                                        3 ( 0.0%)
+    Dancing With the Stars                                       3 ( 0.0%)
+    Golden Globes                                                3 ( 0.0%)
+    YouTube / social media personality                           2 ( 0.0%)
+    Google trends                                                2 ( 0.0%)
+    film awards                                                  2 ( 0.0%)
+    TV & film ratings                                            1 ( 0.0%)
+    Video game awards                                            1 ( 0.0%)
+    NFTs                                                         1 ( 0.0%)
+    Movie awards                                                 1 ( 0.0%)
+    Google's Year in Search                                      1 ( 0.0%)
+    Britain's Got Talent                                         1 ( 0.0%)
+    OnlyFans                                                     1 ( 0.0%)
+    Emmys & film awards                                          1 ( 0.0%)
+    Steam Awards                                                 1 ( 0.0%)
+    TV interviews                                                1 ( 0.0%)
+    YouTube                                                      1 ( 0.0%)
+    Podcast                                                      1 ( 0.0%)
+
+  Persons: 9,694 mentions, 2,764 unique
+  Top 15:
+    MrBeast                                    942
+    Joe Rogan                                  410
+    Taylor Swift                               314
+    Donald Trump                               178
+    Drake                                      163
+    Bad Bunny                                  154
+    Kanye West                                 146
+    Kendrick Lamar                              97
+    Justin Bieber                               97
+    Olivia Dean                                 96
+    Bruno Mars                                  82
+    Sabrina Carpenter                           69
+    Ariana Grande                               66
+    Travis Kelce                                63
+    Ella Langley                                62
+
+  Companies: 5,665 mentions, 210 unique
+  Top 15:
+    Netflix                                  1,825
+    Spotify                                    660
+    Billboard                                  466
+    Dick Clark Productions                     292
+    Goodreads                                  236
+    Crunchyroll                                223
+    Rotten Tomatoes                            154
+    Box Office Mojo                            146
+    Google                                     139
+    Hits Daily Double                          116
+    Steam                                      102
+    ABC                                         99
+    YouTube                                     79
+    Christie's                                  56
+    GRAMMY                                      50
+
+  Organizations: 7,011 mentions, 268 unique
+  Top 15:
+    Academy of Motion Picture Arts and Sciences   683
+    Eurovision                                 676
+    Recording Academy                          674
+    GRAMMY Awards                              463
+    Golden Globes                              394
+    BAFTA                                      289
+    Rotten Tomatoes                            262
+    Critics Choice Awards                      250
+    American Critics Choice Association        248
+    Screen Actors Guild                        241
+    AMPAS                                      211
+    Film Independent                            98
+    Academy of Motion Picture Arts and Scientists    90
+    Survivor                                    69
+    Miss Universe Organization                  68
+
+  Monthly trend (2024+):
+    2024-01    120  ##
+    2024-02     64  #
+    2024-03     30  
+    2024-04     67  #
+    2024-05     49  
+    2024-06     38  
+    2024-07     23  
+    2024-08     48  
+    2024-09     74  #
+    2024-10     91  #
+    2024-11    101  ##
+    2024-12    131  ##
+    2025-01    220  ####
+    2025-02    348  ######
+    2025-03    132  ##
+    2025-04    229  ####
+    2025-05    221  ####
+    2025-06    146  ##
+    2025-07    241  ####
+    2025-08    262  #####
+    2025-09    731  ##############
+    2025-10  1,067  #####################
+    2025-11    870  #################
+    2025-12  1,534  ##############################
+    2026-01  1,999  #######################################
+    2026-02  1,369  ###########################
+    2026-03  1,342  ##########################
+    2026-04  1,694  #################################
+    2026-05    684  #############
+
+======================================================================
+  TECH (7,219 markets)
+======================================================================
+
+  Subcategories:
+    other                                                    4,695 (65.0%)
+    AI benchmarks & model releases                           1,846 (25.6%)
+    Tech company acquisitions & leadership                     317 ( 4.4%)
+    Space missions                                             238 ( 3.3%)
+    tech company acquisitions & leadership                      41 ( 0.6%)
+    Drug & FDA approvals                                        41 ( 0.6%)
+    Self-driving / autonomous vehicles                          39 ( 0.5%)
+    Esports / Chess / Poker                                      2 ( 0.0%)
+
+  Persons: 3,388 mentions, 83 unique
+  Top 15:
+    Elon Musk                                3,059
+    Sam Altman                                  66
+    Jensen Huang                                39
+    Donald Trump                                33
+    Brian Armstrong                             15
+    Bill Peebles                                15
+    Tim Cook                                    12
+    Michael Saylor                              11
+    Ilya Sutskever                               9
+    Brett Adcock                                 8
+    Nof1                                         7
+    Suni Williams                                6
+    Butch Wilmore                                6
+    Jimmy Fallon                                 6
+    Ye                                           6
+
+  Companies: 7,462 mentions, 228 unique
+  Top 15:
+    X                                        2,950
+    Apple                                    1,136
+    OpenAI                                     500
+    Google                                     400
+    Anthropic                                  234
+    xAI                                        219
+    SpaceX                                     195
+    NVIDIA                                     173
+    DeepSeek                                   142
+    Alibaba                                     82
+    Z.ai                                        75
+    Meta                                        68
+    Moonshot                                    66
+    Steam                                       64
+    Mistral                                     60
+
+  Organizations: 304 mentions, 86 unique
+  Top 15:
+    FDA                                         37
+    U.S. Food and Drug Administration           26
+    The Game Awards                             18
+    NCAA                                        16
+    NASA                                        14
+    StatCounter                                 13
+    Epoch AI                                    12
+    ARC Prize                                    8
+    US federal government                        7
+    FAA                                          7
+    U.S. Government                              6
+    Strategy World                               6
+    The Tonight Show                             6
+    SocialBlade                                  5
+    U.S. government                              5
+
+  Monthly trend (2024+):
+    2024-01      9  
+    2024-02     31  
+    2024-03     19  
+    2024-04     16  
+    2024-05     58  #
+    2024-06     45  
+    2024-07     39  
+    2024-08     62  #
+    2024-09     56  #
+    2024-10     44  
+    2024-11     77  #
+    2024-12     98  #
+    2025-01    183  ###
+    2025-02    127  ##
+    2025-03     96  #
+    2025-04    105  ##
+    2025-05    100  ##
+    2025-06    107  ##
+    2025-07    145  ##
+    2025-08    335  ######
+    2025-09    314  ######
+    2025-10    377  #######
+    2025-11    493  #########
+    2025-12    740  ##############
+    2026-01    729  ##############
+    2026-02    590  ###########
+    2026-03    769  ###############
+    2026-04  1,029  ####################
+    2026-05    296  #####
+
+======================================================================
+  ECONOMICS (5,808 markets)
+======================================================================
+
+  Subcategories:
+    Stock market indices                                     2,167 (37.3%)
+    Federal Reserve & interest rates                         1,335 (23.0%)
+    other                                                    1,209 (20.8%)
+    GDP & inflation                                            698 (12.0%)
+    Foreign exchange (FX)                                      342 ( 5.9%)
+    Monetary policy                                             31 ( 0.5%)
+    inflation                                                   23 ( 0.4%)
+    European Central Bank                                        2 ( 0.0%)
+    interest rates                                               1 ( 0.0%)
+
+  Persons: 451 mentions, 32 unique
+  Top 15:
+    Jerome Powell                              312
+    Donald Trump                                24
+    Kevin Warsh                                 17
+    Trump                                       12
+    Scott Bessent                               11
+    Elon                                        10
+    Lisa Cook                                    9
+    Nancy Pelosi                                 7
+    Warren Buffett                               7
+    Bill Ackman                                  7
+    Christopher Waller                           5
+    Michelle Bowman                              3
+    Rick Rieder                                  3
+    Kevin Hassett                                3
+    Judy Shelton                                 2
+
+  Companies: 1,230 mentions, 46 unique
+  Top 15:
+    SPY                                        305
+    S&P 500                                    276
+    Parcl Labs                                 273
+    Investing.com                              113
+    DAX                                         40
+    SPDR S&P 500 ETF Trust                      33
+    Nasdaq 100                                  24
+    QQQ                                         24
+    AAA                                         16
+    Freddie Mac                                 16
+    Bank of Japan                               15
+    Dow Jones                                   10
+    Moody's                                      9
+    Fitch                                        9
+    S&P                                          7
+
+  Organizations: 4,039 mentions, 153 unique
+  Top 15:
+    Bureau of Labor Statistics                 455
+    Federal Reserve                            432
+    FOMC                                       315
+    BLS                                        299
+    Federal Open Market Committee              175
+    NYSE                                       146
+    St. Louis Fed                              140
+    FTSE 100                                   136
+    TSA                                         90
+    Hang Seng                                   77
+    Federal Open Market Committee (FOMC)        71
+    Eurostat                                    69
+    European Central Bank                       67
+    INDEC                                       61
+    National Institute of Statistics and Census    60
+
+  Monthly trend (2024+):
+    2024-01      6  
+    2024-02     15  
+    2024-03     12  
+    2024-04     11  
+    2024-05     10  
+    2024-06     10  
+    2024-07     12  
+    2024-08     26  
+    2024-09     17  
+    2024-10     14  
+    2024-11     30  
+    2024-12     64  #
+    2025-01     66  #
+    2025-02     82  #
+    2025-03     65  #
+    2025-04    131  ##
+    2025-05     89  #
+    2025-06     62  #
+    2025-07    109  ##
+    2025-08     91  #
+    2025-09    130  ##
+    2025-10    244  ####
+    2025-11    491  #########
+    2025-12    474  #########
+    2026-01    716  ##############
+    2026-02    735  ##############
+    2026-03    805  ################
+    2026-04    667  #############
+    2026-05    389  #######
+
+======================================================================
+  GEOPOLITICS (4,494 markets)
+======================================================================
+
+  Subcategories:
+    other                                                    1,406 (31.3%)
+    Iran & sanctions                                           985 (21.9%)
+    Middle East conflicts                                      965 (21.5%)
+    Russia & Ukraine                                           855 (19.0%)
+    International diplomacy                                    280 ( 6.2%)
+    NATO                                                         3 ( 0.1%)
+
+  Persons: 869 mentions, 133 unique
+  Top 15:
+    Donald Trump                               156
+    Vladimir Putin                             106
+    Ali Khamenei                                98
+    Volodymyr Zelenskyy                         93
+    Trump                                       41
+    Benjamin Netanyahu                          22
+    Xi Jinping                                  22
+    Mojtaba Khamenei                            19
+    Bret Baier                                  18
+    JD Vance                                    15
+    Volodymyr Zelensky                          13
+    Mahmoud Abbas                               10
+    Mark Rutte                                  10
+    Khamenei                                    10
+    Yahya Sinwar                                 9
+
+  Companies: 26 mentions, 21 unique
+  Top 15:
+    Cloudflare                                   3
+    Ever Green                                   2
+    A.P. Moller-Maersk                           2
+    Google                                       2
+    Ever Given                                   1
+    Wagner Group                                 1
+    Maersk                                       1
+    Rolling Stone                                1
+    Starlink Services                            1
+    X/Twitter                                    1
+    Spotify                                      1
+    Discord                                      1
+    Twitch                                       1
+    Gmail                                        1
+    Character.AI                                 1
+
+  Organizations: 5,817 mentions, 304 unique
+  Top 15:
+    Israel                                   1,162
+    Iran                                       513
+    US                                         396
+    ISW                                        370
+    United States                              206
+    Lebanon                                    172
+    Gaza                                       169
+    Hamas                                      162
+    Hezbollah                                  127
+    IMF                                        114
+    Ukraine                                    109
+    United Nations                             104
+    Yemen                                       94
+    US military                                 92
+    Venezuela                                   82
+
+  Monthly trend (2024+):
+    2024-01     24  
+    2024-02     19  
+    2024-03     13  
+    2024-04     18  
+    2024-05     19  
+    2024-06     17  
+    2024-07     16  
+    2024-08     33  
+    2024-09     36  
+    2024-10     65  #
+    2024-11     15  
+    2024-12     43  
+    2025-01     48  
+    2025-02     71  #
+    2025-03     52  #
+    2025-04     42  
+    2025-05     68  #
+    2025-06    181  ###
+    2025-07    113  ##
+    2025-08    118  ##
+    2025-09    191  ###
+    2025-10    159  ###
+    2025-11    378  #######
+    2025-12    322  ######
+    2026-01    542  ##########
+    2026-02    453  #########
+    2026-03    780  ###############
+    2026-04    378  #######
+    2026-05     92  #
+
+======================================================================
+  BUSINESS (16,824 markets)
+======================================================================
+
+  Subcategories:
+    Stock market indices                                    12,330 (73.3%)
+    Corporate earnings                                       2,171 (12.9%)
+    other                                                      834 ( 5.0%)
+    IPOs & fundraising                                         561 ( 3.3%)
+    tech company acquisitions & leadership                     505 ( 3.0%)
+    Mergers & acquisitions                                     170 ( 1.0%)
+    Company leadership changes                                 166 ( 1.0%)
+    stock market indices                                        58 ( 0.3%)
+    Tech company acquisitions & leadership                      20 ( 0.1%)
+    Banking                                                      3 ( 0.0%)
+    Banking & financial institutions                             2 ( 0.0%)
+    Crypto regulation                                            2 ( 0.0%)
+    Corporate leadership changes                                 1 ( 0.0%)
+    Banking & finance                                            1 ( 0.0%)
+
+  Persons: 572 mentions, 154 unique
+  Top 15:
+    Elon Musk                                  225
+    Trump                                       36
+    Linda Yaccarino                             18
+    Warren Buffett                              18
+    Donald Trump                                15
+    Jeff Bezos                                  12
+    Larry Ellison                               12
+    Michael Saylor                              12
+    Calvin McDonald                              9
+    Larry Fink                                   8
+    Bill Ackman                                  7
+    Jensen Huang                                 7
+    Tim Cook                                     6
+    Demna                                        6
+    Brian Armstrong                              5
+
+  Companies: 18,201 mentions, 978 unique
+  Top 15:
+    Microsoft                                1,415
+    Amazon                                   1,410
+    Google                                   1,380
+    Apple                                    1,376
+    NVIDIA                                   1,325
+    Tesla                                    1,187
+    Meta                                     1,170
+    Alphabet Inc.                            1,019
+    Netflix                                    907
+    Palantir Technologies Inc.                 722
+    Opendoor Technologies Inc.                 690
+    Palantir                                   308
+    Opendoor                                   287
+    Rocket Lab USA, Inc.                       253
+    Meta Platforms, Inc.                       219
+
+  Organizations: 518 mentions, 60 unique
+  Top 15:
+    NASDAQ                                     258
+    Bloomberg                                   76
+    U.S. Securities and Exchange Commission     21
+    U.S. federal government                     17
+    SEC                                         15
+    NYSE                                        13
+    Nasdaq                                      10
+    S&P 500                                      9
+    New York State Gaming Facility Location Board     8
+    Port Authority of Baltimore                  6
+    Financial Times                              6
+    FDIC                                         4
+    Federal Deposit Insurance Corporation (FDIC)     4
+    Forbes                                       4
+    Commodity Futures Trading Commission         4
+
+  Monthly trend (2024+):
+    2024-01     19  
+    2024-02      7  
+    2024-03     15  
+    2024-04     16  
+    2024-05     19  
+    2024-06     27  
+    2024-07      4  
+    2024-08     12  
+    2024-09      8  
+    2024-10      6  
+    2024-11      8  
+    2024-12     28  
+    2025-01     56  #
+    2025-02     24  
+    2025-03     22  
+    2025-04     75  #
+    2025-05     56  #
+    2025-06     28  
+    2025-07     99  #
+    2025-08     55  #
+    2025-09    177  ###
+    2025-10    874  #################
+    2025-11  2,003  ########################################
+    2025-12  1,676  #################################
+    2026-01  2,234  ############################################
+    2026-02  2,295  #############################################
+    2026-03  2,412  ################################################
+    2026-04  3,061  #############################################################
+    2026-05  1,432  ############################
+
+======================================================================
+  COMMODITIES (1,920 markets)
+======================================================================
+
+  Subcategories:
+    Gold & silver                                              858 (44.7%)
+    Crude oil price                                            788 (41.0%)
+    Natural Gas                                                119 ( 6.2%)
+    other                                                      110 ( 5.7%)
+    Copper                                                      15 ( 0.8%)
+    Natural gas                                                 11 ( 0.6%)
+    Silver & gold                                               11 ( 0.6%)
+    Agricultural commodities                                     7 ( 0.4%)
+    Natural gas price                                            1 ( 0.1%)
+
+  Persons: 0 mentions, 0 unique
+  Top 15:
+
+  Companies: 518 mentions, 11 unique
+  Top 15:
+    CME Group                                  372
+    American Automobile Association (AAA)       25
+    Bloomberg                                   21
+    Subdial                                     21
+    CME                                         19
+    New York Mercantile Exchange                18
+    Rolex                                       15
+    NASDAQ                                      14
+    American Automotive Association (AAA)       10
+    NYMEX                                        2
+    Audemars Piguet                              1
+
+  Organizations: 368 mentions, 12 unique
+  Top 15:
+    CME                                        192
+    CME Group                                   91
+    New York Mercantile Exchange                29
+    Yahoo Finance                               15
+    OPEC                                        14
+    U.S. Energy Information Administration      12
+    WatchCharts                                  4
+    St. Louis Fed                                3
+    BLS                                          3
+    NASDAQ                                       2
+    American Automotive Association (AAA)        2
+    Saudi Arabia                                 1
+
+  Monthly trend (2024+):
+    2024-10     11  
+    2024-12      9  
+    2025-02      1  
+    2025-03      1  
+    2025-04     14  
+    2025-09      3  
+    2025-10     27  
+    2025-11     12  
+    2025-12    248  ####
+    2026-01    159  ###
+    2026-02    151  ###
+    2026-03    384  #######
+    2026-04    555  ###########
+    2026-05    288  #####
+
+======================================================================
+  SCIENCE (466 markets)
+======================================================================
+
+  Subcategories:
+    Epidemics & public health                                  400 (85.8%)
+    other                                                       43 ( 9.2%)
+    Academic & Nobel prizes                                     15 ( 3.2%)
+    Medical research & drug approvals                            5 ( 1.1%)
+    Drug & FDA approvals                                         2 ( 0.4%)
+    Academic & research integrity                                1 ( 0.2%)
+
+  Persons: 40 mentions, 24 unique
+  Top 15:
+    RFK                                          7
+    Biden                                        3
+    Corrado Malanga                              3
+    Filippo Biondi                               3
+    Nicole Ciccolo                               3
+    Dan Ariely                                   2
+    Gavin Newsom                                 2
+    James Maynard                                1
+    Hugo Duminil-Copin                           1
+    June Huh                                     1
+    Maryna Viazovska                             1
+    Joe Biden                                    1
+    Hong Wang                                    1
+    Jacob Tsimerman                              1
+    John Pardon                                  1
+
+  Companies: 12 mentions, 6 unique
+  Top 15:
+    Pfizer                                       3
+    Johnson & Johnson                            3
+    BioNTech                                     2
+    Moderna                                      2
+    Johnson and Johnson                          1
+    AstraZeneca                                  1
+
+  Organizations: 551 mentions, 38 unique
+  Top 15:
+    CDC                                        338
+    FluSurv-NET                                 31
+    United States                               21
+    NASA                                        21
+    World Health Organization                   20
+    WHO                                         16
+    FDA                                         15
+    Our World in Data                           13
+    International Mathematical Union            12
+    National Oceanic and Atmospheric Administration     8
+    IMU                                          6
+    OurWorldInData                               4
+    US federal agency                            4
+    US                                           3
+    Khafre Project                               3
+
+  Monthly trend (2024+):
+    2024-01      2  
+    2024-04      5  
+    2024-05      6  
+    2024-07      1  
+    2024-08      7  
+    2024-11      4  
+    2024-12      9  
+    2025-01      1  
+    2025-02     15  
+    2025-03      5  
+    2025-04      3  
+    2025-05      4  
+    2025-06      1  
+    2025-07      5  
+    2025-08      6  
+    2025-09     24  
+    2025-11      9  
+    2025-12     10  
+    2026-01     53  #
+    2026-02     34  
+    2026-03     36  
+    2026-04     41  
+    2026-05     12  
