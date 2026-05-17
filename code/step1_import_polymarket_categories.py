@@ -2,12 +2,12 @@
 # step1_import_polymarket_categories.py
 # Input  : temp/markets_categories_entities.parquet
 #          raw/markets.parquet
-# Output : output/category_report.txt
-#          output/fig_category_pct.png
-#          output/fig_subcategory_business.png
-#          output/fig_time_trend_all.png
-#          output/fig_top_companies_business.png
-#          output/fig_top_persons_politics.png
+# Output : output/figures/fig_category_pct.png
+#          output/figures/fig_subcategory_business.png
+#          output/figures/fig_time_trend_all.png
+#          output/figures/fig_top_companies_business.png
+#          output/figures/fig_top_persons_politics.png
+#          output/tables/category_report.txt
 # ****************************************************
 
 import os
@@ -17,13 +17,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import Counter
 
-from config import DATA_TEMP, DATA_OUTPUT, PARENT
+from config import DATA_TEMP, OUTPUT_FIGURES, OUTPUT_TABLES, PARENT
 
 DATA_RAW = PARENT / "data" / "raw"
 
 plt.rcParams.update({"figure.dpi": 150, "figure.figsize": (10, 6)})
 
-os.makedirs(DATA_OUTPUT, exist_ok=True)
+os.makedirs(OUTPUT_FIGURES, exist_ok=True)
+os.makedirs(OUTPUT_TABLES, exist_ok=True)
 
 """
 Load
@@ -54,7 +55,7 @@ for bar, val in zip(bars, cat_pct_sorted.values):
     ax.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height()/2,
             f"{val:.1f}%", va="center", fontsize=9)
 plt.tight_layout()
-plt.savefig(os.path.join(DATA_OUTPUT, "fig_category_pct.png"))
+plt.savefig(os.path.join(OUTPUT_FIGURES, "fig_category_pct.png"))
 plt.close()
 print("Saved: fig_category_pct.png")
 
@@ -74,7 +75,7 @@ ax.barh(biz_sub_sorted.index, biz_sub_sorted.values, color="darkorange")
 ax.set_xlabel("Count")
 ax.set_title(f"Business Subcategories (N={len(biz):,})")
 plt.tight_layout()
-plt.savefig(os.path.join(DATA_OUTPUT, "fig_subcategory_business.png"))
+plt.savefig(os.path.join(OUTPUT_FIGURES, "fig_subcategory_business.png"))
 plt.close()
 print("Saved: fig_subcategory_business.png")
 
@@ -100,7 +101,7 @@ xtick_labels = [months_all[i] if i < len(months_all) else "" for i in xtick_idx]
 ax.set_xticks(xtick_idx)
 ax.set_xticklabels(xtick_labels, rotation=45, ha="right", fontsize=8)
 plt.tight_layout()
-plt.savefig(os.path.join(DATA_OUTPUT, "fig_time_trend_all.png"))
+plt.savefig(os.path.join(OUTPUT_FIGURES, "fig_time_trend_all.png"))
 plt.close()
 print("Saved: fig_time_trend_all.png")
 
@@ -123,7 +124,7 @@ ax.barh(top_comps_sorted.index, top_comps_sorted.values, color="seagreen")
 ax.set_xlabel("Mentions")
 ax.set_title(f"Top 20 Companies in Business Category (unique={len(comp_counts):,})")
 plt.tight_layout()
-plt.savefig(os.path.join(DATA_OUTPUT, "fig_top_companies_business.png"))
+plt.savefig(os.path.join(OUTPUT_FIGURES, "fig_top_companies_business.png"))
 plt.close()
 print("Saved: fig_top_companies_business.png")
 
@@ -147,7 +148,7 @@ ax.barh(top_persons_sorted.index, top_persons_sorted.values, color="indianred")
 ax.set_xlabel("Mentions")
 ax.set_title(f"Top 20 Persons in Politics Category (unique={len(person_counts):,})")
 plt.tight_layout()
-plt.savefig(os.path.join(DATA_OUTPUT, "fig_top_persons_politics.png"))
+plt.savefig(os.path.join(OUTPUT_FIGURES, "fig_top_persons_politics.png"))
 plt.close()
 print("Saved: fig_top_persons_politics.png")
 
@@ -223,8 +224,8 @@ for c in TARGET_CATS:
         report_lines.append(f"    {m}  {cnt:>5,}  {bar}")
 
 report_txt = "\n".join(report_lines)
-with open(os.path.join(DATA_OUTPUT, "category_report.txt"), "w", encoding="utf-8") as f:
+with open(os.path.join(OUTPUT_TABLES, "category_report.txt"), "w", encoding="utf-8") as f:
     f.write(report_txt)
 print("Saved: category_report.txt")
 
-print(f"\nDone — all outputs in {DATA_OUTPUT}")
+print(f"\nDone — figures in {OUTPUT_FIGURES}, tables in {OUTPUT_TABLES}")

@@ -15,6 +15,13 @@ DATA_TEMP = DATA / "temp"
 DATA_OUTPUT = DATA / "output"
 DATA_RESULTS = DATA / "tables_and_figures"
 
+# ————————————————————————————— #
+#     Output Area
+# ————————————————————————————— #
+OUTPUT = PARENT / "output"
+OUTPUT_FIGURES = OUTPUT / "figures"
+OUTPUT_TABLES = OUTPUT / "tables"
+
 
 # ————————————————————————————— #
 #     Debug / Display
@@ -30,4 +37,9 @@ if __name__ == "__main__":
     print("|  DATA_TEMP:      ", DATA_TEMP)
     print("|  DATA_OUTPUT:    ", DATA_OUTPUT)
     print("|  DATA_RESULTS:   ", DATA_RESULTS)
+    print("|" + "-" * 78)
+
+    print("|OUTPUT:           ", OUTPUT)
+    print("|  OUTPUT_FIGURES: ", OUTPUT_FIGURES)
+    print("|  OUTPUT_TABLES:  ", OUTPUT_TABLES)
     print("|" + "-" * 78)
