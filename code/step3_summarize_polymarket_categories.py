@@ -30,7 +30,7 @@ os.makedirs(OUTPUT_TABLES, exist_ok=True)
 Load
 """
 cats = pd.read_parquet(os.path.join(DATA_TEMP, "markets_categories_entities.parquet"))
-markets = pd.read_parquet(os.path.join(DATA_RAW, "markets.parquet"), columns=["id", "createdAt"])
+markets = pd.read_parquet(os.path.join(DATA_RAW, "markets.parquet"), columns=["id", "question", "createdAt"])
 
 print(f"Categories: {cats.shape[0]:,} rows")
 print(f"Markets:    {markets.shape[0]:,} rows")
@@ -63,7 +63,7 @@ print("Saved: fig_category_pct.png")
 2. Subcategory Distribution (for each target category)
 """
 TARGET_CATS = ["politics", "culture", "tech", "economics",
-               "geopolitics", "business", "commodities", "science"]
+               "geopolitics", "business", "commodities", "science", "unknown"]
 
 # business subcategory bar chart
 biz = cats[cats["category_llm"] == "business"]
@@ -214,8 +214,14 @@ for c in TARGET_CATS:
     for name, cnt in oc.most_common(15):
         report_lines.append(f"    {name:40s} {cnt:>5,}")
 
-    # time trend
+    # example questions
     sub_merged = merged[merged["category_llm"] == c]
+    examples = sub_merged["question"].dropna().sample(n=min(10, len(sub_merged)), random_state=42)
+    report_lines.append(f"\n  Example markets:")
+    for q in examples:
+        report_lines.append(f"    - {str(q)[:120]}")
+
+    # time trend
     monthly = sub_merged.groupby("month").size()
     monthly = monthly[monthly.index >= "2024-01"].sort_index()
     report_lines.append(f"\n  Monthly trend (2024+):")

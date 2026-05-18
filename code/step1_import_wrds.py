@@ -46,16 +46,31 @@ compustat = db.raw_sql("""
 
 print(f"Compustat quarterly raw: {compustat.shape[0]:,} rows")
 
-compustat["size"]      = np.log(compustat["atq"].clip(lower=1))
-compustat["leverage"]  = (compustat["dlttq"] + compustat["dlcq"]) / compustat["atq"]
+# drop rows where atq is missing or non-positive — every ratio below uses it
+compustat = compustat[compustat["atq"].notna() & (compustat["atq"] > 0)].reset_index(drop=True)
+
+compustat["size"]      = np.log(compustat["atq"])
+compustat["leverage"]  = (compustat["dlttq"].fillna(0) + compustat["dlcq"].fillna(0)) / compustat["atq"]
 compustat["roa"]       = compustat["niq"] / compustat["atq"]
-compustat["mtb"]       = (compustat["cshoq"] * compustat["prccq"]) / compustat["ceqq"]
+
+# mtb: only when ceqq > 0 (positive book equity)
+ceqq_pos = compustat["ceqq"].where(compustat["ceqq"] > 0)
+compustat["mtb"]       = (compustat["cshoq"] * compustat["prccq"]) / ceqq_pos
+
+# sale_growth: only when prior-quarter saleq > 0 (avoid div-by-zero blow-ups)
 compustat = compustat.sort_values(["gvkey", "fyearq", "fqtr"]).reset_index(drop=True)
-compustat["sale_growth"] = compustat.groupby("gvkey")["saleq"].pct_change(fill_method=None)
+prior_sale = compustat.groupby("gvkey")["saleq"].shift(1)
+mask = ((prior_sale > 0) & compustat["saleq"].notna()).fillna(False).to_numpy()
+compustat["sale_growth"] = np.where(
+    mask,
+    compustat["saleq"].to_numpy() / prior_sale.to_numpy() - 1.0,
+    np.nan,
+)
+
 compustat["loss"]      = np.where(compustat["niq"].isna(), np.nan, (compustat["niq"] < 0).astype(float))
 compustat["rd_int"]    = compustat["xrdq"].fillna(0) / compustat["atq"]
 compustat["cfo"]       = compustat["oancfy"] / compustat["atq"]
-compustat["tangibility"] = compustat["ppentq"] / compustat["atq"]
+compustat["tangibility"] = (compustat["ppentq"] / compustat["atq"]).clip(lower=0, upper=1)
 
 compustat = compustat.drop_duplicates(subset=["gvkey", "fyearq", "fqtr"])
 print(f"Compustat clean: {compustat.shape[0]:,} rows  ({compustat['gvkey'].nunique():,} firms)")
@@ -157,9 +172,15 @@ print(f"\nConf calls raw: {confcall.shape[0]:,} rows")
 confcall["year"]    = pd.to_datetime(confcall["call_date"]).dt.year
 confcall["quarter"] = pd.to_datetime(confcall["call_date"]).dt.quarter
 
+# keydeveventtypename uses plural "Earnings Calls"; match case-insensitively
+# to also catch any variant like "Earnings Call Transcript"
+confcall["is_earnings"] = confcall["eventtype"].fillna("").str.contains(
+    "earnings call", case=False, regex=False
+).astype(int)
+
 confcall_fq = confcall.groupby(["gvkey", "year", "quarter"]).agg(
     n_conf_calls    = ("transcriptid", "count"),
-    n_earnings_call = ("eventtype", lambda x: (x == "Earnings Call").sum()),
+    n_earnings_call = ("is_earnings", "sum"),
 ).reset_index()
 
 confcall_fq = confcall_fq.dropna(subset=["gvkey"])
@@ -190,7 +211,10 @@ print(f"\nExecuComp CEO raw: {ceo.shape[0]:,} rows")
 
 ceo["becameceo"] = pd.to_datetime(ceo["becameceo"], errors="coerce")
 ceo["leftofc"]   = pd.to_datetime(ceo["leftofc"], errors="coerce")
-ceo["tenure_years"] = (pd.to_datetime(ceo["year"].astype(int).astype(str) + "-12-31", format="%Y-%m-%d") - ceo["becameceo"]).dt.days / 365.25
+year_end = pd.to_datetime(ceo["year"].astype(int).astype(str) + "-12-31", format="%Y-%m-%d")
+ceo["tenure_years"] = (year_end - ceo["becameceo"]).dt.days / 365.25
+# year < becameceo means the row predates this person's CEO term — null it out
+ceo.loc[ceo["tenure_years"] < 0, "tenure_years"] = np.nan
 
 ceo = ceo.drop_duplicates(subset=["gvkey", "year"])
 print(f"CEO fm_yr: {ceo.shape[0]:,} rows  ({ceo['gvkey'].nunique():,} firms)")
