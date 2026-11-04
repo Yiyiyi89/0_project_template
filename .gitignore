@@ -52,7 +52,7 @@ ENV/
 *.sublime-workspace
 *.sublime-project
 
-# Ignore all files in data folders 
+# Ignore all files in data folders
 build/data/*
 analysis/data/*
 
@@ -80,4 +80,23 @@ analysis/data/*
 !*.bat
 !*.yaml
 !*.yml
-!*.config 
+!*.config
+
+# Research data are excluded regardless of extension; retain the skeleton.
+/data/**
+!/data/**/
+!/data/**/.gitkeep
+
+# Local experiments; preserve the empty folder.
+/trial/*
+!/trial/.gitkeep
+
+# Dependency manifests are documentation, not research data.
+!requirements.txt
+!requirements-*.txt
+
+# Diagram utility output
+/combined_flow*
+
+# Keep environments excluded after legacy code-file exceptions above.
+**/.venv/

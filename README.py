@@ -24,13 +24,6 @@ def tree(dir_path, prefix: str = ""):
             yield from tree(path, prefix=prefix + extension)
 
 
-# Set dir_path to the current working directory and convert it to Path object
-dir_path = Path(os.getcwd())
-
-# Print the directory tree
-for line in tree(dir_path):
-    print(line)
-
 """
 Flow chart for the project
 """
@@ -229,9 +222,11 @@ def generate_data_flow_diagram(
     return graph.render(output, format=fmt, cleanup=cleanup)
 
 
-# Example usage within Python:
-# from data_flow_diagram_generator import generate_data_flow_diagram
-file_path = generate_data_flow_diagram(
-    ["./build/code", "./analysis/code"], output="combined_flow"
-)
-print(f"Generated diagram at {file_path}")
+if __name__ == "__main__":
+    root = Path(__file__).resolve().parent
+    for line in tree(root / "code"):
+        print(line)
+    file_path = generate_data_flow_diagram(
+        [root / "code"], output=str(root / "combined_flow")
+    )
+    print(f"Generated diagram at {file_path}")

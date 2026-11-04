@@ -1,0 +1,6 @@
+# Starter dependencies; pin tested versions in each real project.
+pandas
+numpy
+pyarrow
+# README.py also needs the Graphviz system executable on PATH.
+graphviz
